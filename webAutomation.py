@@ -1,4 +1,5 @@
 from selenium import webdriver # Control the Chrome driver. Chrome driver isn't the same as Chrome Browser
+import selenium.common.exceptions
 from selenium.webdriver.common.keys import Keys #Simulate keyboard and mouse actions on the driver
 import time
 
@@ -25,8 +26,16 @@ class webAutomation:
             searchInput.send_keys(Keys.RETURN) #"Press" enter on the input
 
             #search for the latest info about the package
-            process = driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[2]/div/div/div[2]/div[2]/div[4]/table[1]")
-            print(process.text)
+            try:
+                process = driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[2]/div/div/div[2]/div[2]/div[4]/table[1]")
+                print(process.text)
+            
+            except UnboundLocalError:
+                print("Não é possível achar dados com o código de rastreamento salvo.")
+                print("Verifique se o código está correto")
+            except selenium.common.exceptions.NoSuchElementException:
+                print("Não é possível achar dados com o código de rastreamento salvo.")
+                print("Verifique se o código está correto")
             
 
         except AssertionError as identifier:

@@ -4,8 +4,11 @@ import webAutomation
 print("Qualquer problemas ou sujestões, entre em contato pelo github: ")
 print("https://github.com/Erick-Oliveira-ET/Package-automation-python")
 print("\nInicializando processos...")
+
+#Creates the two classes 
 webAuto = webAutomation.webAutomation()
 data = db.database()
+data.dbCreate()
 
 def loop():
     while True:
