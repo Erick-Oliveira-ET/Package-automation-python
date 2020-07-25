@@ -8,14 +8,15 @@ class database:
     def findAll(self):
         with open(self.db, 'r', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
+            print("Nome do Produto       |        Código do produto")
             for row in reader:
-                print(row['product_name'], row['product_code'])
+                print(row['product_name'], "                  ", row['product_code'])
 
     def find_one_by_name(self, name):
         with open(self.db, 'r', newline='') as csvfile :
             reader = csv.DictReader(csvfile)
             for row in reader:
-                if row['product_name'] == name:
+                if row['product_name'].lower() in name.lower():
                     return row['product_code']
         
     def create(self, name, code):
