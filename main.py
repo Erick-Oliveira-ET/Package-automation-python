@@ -1,10 +1,11 @@
 import db
 import webAutomation
 
-print("Inicializando processos...")
+print("Qualquer problemas ou sujestões, entre em contato pelo github: ")
+print("https://github.com/Erick-Oliveira-ET/Package-automation-python")
+print("\nInicializando processos...")
 webAuto = webAutomation.webAutomation()
 data = db.database()
-
 
 def loop():
     while True:
