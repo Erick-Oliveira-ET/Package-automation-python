@@ -1,14 +1,39 @@
-from selenium import webdriver # Control the Chrome driver. Chrome driver isn't the same as Chrome Browser
-from selenium.webdriver.common.keys import Keys #Simulate keyboard and mouse actions on the driver
-PATH = r"C:\Program Files (x86)\chromedriver.exe" #r is just to avoid pylint warning
+import db
+import webAutomation
 
-driver = webdriver.Chrome(PATH) #open a webdriver using the path to it
+print("Início do Código")
+webAuto = webAutomation.webAutomation()
+data = db.database()
 
-#waits for the event onload of the page fire. 
-#however, if the page has a lot of AJAX this may not work properly
-driver.get("http://www.correios.com.br/") #open the site in a new browser
-searchInput = driver.find_element_by_xpath("//*[@id='objetos']") #find the search Input by xpath
-searchInput.send_keys("pyconLB752676935SE") #"Type" this message on the searchInput
-searchInput.send_keys(Keys.RETURN) #"Press" enter on the input
 
-driver.close() #close the browser tab
+def loop():
+    while True:
+        print("loop")
+
+        command = input("O que você quer fazer?")
+
+        if command == "create":
+            product_name = input("Nome do Produto:")
+            product_code = input("Código do Produto:")
+            data.create(product_name, product_code)
+
+        elif command == "seeAll":
+            data.findAll()
+
+        elif command == "search":
+            product_name = input("Nome do Produto:")
+            product_code = data.find_one_by_name(product_name)
+            webAuto.search(product_code)
+
+        elif command == "delete":
+            product_name = input("Nome do Produto:")
+            data.destroy(product_name)
+            
+
+        response = input("Quer finalizar? [s/n]")
+
+        if response == "s":
+            break
+
+if __name__ == "__main__":
+    loop()
