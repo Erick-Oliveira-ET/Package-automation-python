@@ -15,13 +15,22 @@ class webAutomation:
         #waits for the event onload of the page fire. 
         #however, if the page has a lot of AJAX this may not work properly
         driver.get("https://www2.correios.com.br/sistemas/rastreamento/resultado.cfm") #open the site in a new browser
-        searchInput = driver.find_element_by_xpath("//*[@id='objetos']") #find the search Input by xpath
-        searchInput.send_keys(product_code) #"Type" this message on the searchInput
-        searchInput.send_keys(Keys.RETURN) #"Press" enter on the input
+        
+        try:
+            assert "home" in driver.title
+            assert "No results found." not in driver.page_source
+            
+            searchInput = driver.find_element_by_xpath("//*[@id='objetos']") #find the search Input by xpath
+            searchInput.send_keys(product_code) #"Type" this message on the searchInput
+            searchInput.send_keys(Keys.RETURN) #"Press" enter on the input
 
-        #search for the latest info about the package
-        process = driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[2]/div/div/div[2]/div[2]/div[4]/table[1]")
-        print(process.text)
+            #search for the latest info about the package
+            process = driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[2]/div/div/div[2]/div[2]/div[4]/table[1]")
+            print(process.text)
+            
 
-        time.sleep(5)
+        except AssertionError as identifier:
+            print("Essa página não está disponível no momento. Tente mais tarde.")
+            print(f"Error: {identifier}")
+
         driver.close() #close the browser tab
