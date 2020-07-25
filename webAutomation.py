@@ -7,7 +7,10 @@ class webAutomation:
         self.PATH = r"C:\Program Files (x86)\chromedriver.exe" #r is just to avoid pylint warning
 
     def search(self, product_code):
-        driver = webdriver.Chrome(self.PATH) #open a webdriver using the path to it
+        #Option to open Chrome without opening the display
+        op = webdriver.ChromeOptions()
+        op.add_argument('headless')
+        driver = webdriver.Chrome(self.PATH, options=op) #open a webdriver using the path to it
 
         #waits for the event onload of the page fire. 
         #however, if the page has a lot of AJAX this may not work properly
@@ -22,5 +25,3 @@ class webAutomation:
 
         time.sleep(5)
         driver.close() #close the browser tab
-
-    pass
