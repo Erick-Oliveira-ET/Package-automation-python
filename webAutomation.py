@@ -4,7 +4,7 @@ import time
 
 class webAutomation:
     def __init__(self):
-        self.PATH = r"C:\Program Files (x86)\chromedriver.exe" #r is just to avoid pylint warning
+        self.PATH = r"chromedriver.exe" #r is just to avoid pylint warning
 
     def search(self, product_code):
         #Option to open Chrome without opening the display
